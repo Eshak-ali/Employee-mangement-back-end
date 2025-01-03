@@ -18,7 +18,7 @@ router.post("/", uploads.single('image'), async (req, res) => {
   }
 
   try {
-    const empdetails = new Employee({
+    const empdetails = await new Employee({
       name: name,
       password: password,
       phone: phone,
