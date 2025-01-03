@@ -4,17 +4,9 @@ const path = require("path");
 const router = express.Router();
 const { Employee, Taskfield } = require("../Models/userSchema");
 const { error } = require("console");
-const { isValidObjectId } = require("mongoose");
+const {storage}=require('../Clouidnary/Cloudinary')
 
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
 
 const uploads = multer({ storage });
 
@@ -34,7 +26,7 @@ router.post("/", uploads.single('image'), async (req, res) => {
       email: email,
       employeeid: employeeid,
       position: position,
-      image: req.file.filename,
+      image: req.file.path,
       leave,
       days,
       Rating: Rating,
@@ -94,7 +86,7 @@ router.get("/all", async (req, res) => {
 router.post("/update", uploads.single('image'), async (req, res) => {
   try {
     const { _id, ...emp } = req.body;
-    const img = req.file ? req.file.filename : 'image';
+    const img = req.file ? req.file.path : 'image';
     const updateemployee = await Employee.findByIdAndUpdate(
       _id,
       { ...emp, image: img },

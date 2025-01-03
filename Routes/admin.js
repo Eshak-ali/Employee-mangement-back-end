@@ -3,15 +3,9 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const {storage}=require('../Clouidnary/Cloudinary')
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    },
-});
+
 
 router.post("/set_admin", async (req, res) => {
     try {
@@ -61,7 +55,7 @@ router.post("/login", async (req, res) => {
 router.post("/update", uploads.single("image"), async (req, res) => {
     try {
         const { _id, name, password, phone, email } = req.body;
-        const img = req.file ? req.file.filename : "image";
+        const img = req.file ? req.file.path : "image";
         const updateemployee = await Admin.findByIdAndUpdate(
             _id,
             { name, password, phone, email, image: img },
