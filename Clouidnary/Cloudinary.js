@@ -12,7 +12,7 @@ cloudinary.config({
 const storage=new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'uploads', // Specify the folder name in Cloudinary
+    folder: 'employee', // Specify the folder name in Cloudinary
     formats: 'jpg'|| 'jpeg' || 'png', // Specify allowed file types
   },
 });

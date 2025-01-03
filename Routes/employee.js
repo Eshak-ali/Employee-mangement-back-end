@@ -3,7 +3,6 @@ const multer = require("multer");
 const path = require("path");
 const router = express.Router();
 const { Employee, Taskfield } = require("../Models/userSchema");
-const { error } = require("console");
 const {storage}=require('../Clouidnary/Cloudinary')
 
 
@@ -13,6 +12,7 @@ const uploads = multer({ storage });
 router.post("/", uploads.single('image'), async (req, res) => {
   const { name, password, phone, age, email, employeeid, position, leave, days, Rating, task, salary, cashier } =
     req.body;
+    
   if (!req.file) {
     return res.status(400).json({ message: "no file uploaded" });
   }
