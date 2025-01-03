@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "rewrites": [
-    { "source": "/admin/set_admin", "destination": "/api/set_admin" }
   ]
 }
