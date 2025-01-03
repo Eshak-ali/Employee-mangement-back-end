@@ -12,7 +12,8 @@ const corsoption = {
 const app = express();
 app.use(cors(corsoption));
 app.use(express.json());
-try {
+app.use(express.urlencoded({ extended: true }));
+try  {
   mongoose.connect(process.env.MONGODB_URL);
   console.log("connected successfully");
 } catch (error) {
